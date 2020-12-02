@@ -16,7 +16,7 @@ public class Timekeeping implements Serializable {
     private int time_Out;
     private String empID;
 
-    private Timekeeping(){}
+    protected Timekeeping(){}
 
     private Timekeeping(Builder builder){
         this.time_In = builder.time_In;

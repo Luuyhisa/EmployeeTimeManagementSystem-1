@@ -26,6 +26,17 @@ public class HomeController {
      * @param: baseUrl (localhost:8080/home)
      * @return: EmployeeTimeManagement Application as /home
      * */
+//    @Autowired
+//    EmployeeRepository repo;
+//
+//    @RequestMapping({"/", "/index","/home"})
+//    @ResponseBody
+//    public String indexPage(Model model){
+//        List<Employee> emp=(List<Employee>) repo.findAll();
+//        model.addAttribute("empllist",emp);
+//        return "index";
+//
+//    }
     @Autowired
     EmployeeRepository repo;
 
@@ -37,7 +48,6 @@ public class HomeController {
         return "index";
 
     }
-
 
 //    @RequestMapping({"/", "/index","/home"})
 //    @ResponseBody

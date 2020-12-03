@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping ("employee_time_management/leaveReport")
+@RequestMapping ("/leaveReport")
 public class LeaveReportController {
 
     //access to LeaveReportService bean using Spring autowired annotation
@@ -108,7 +108,7 @@ public class LeaveReportController {
      * */
     @GetMapping ("/getAll")
     public Set<LeaveReport> getAll() {
-        return leaveReportService.getAll().stream().collect(Collectors.toSet());
+        return leaveReportService.getAll();
     }
 
 }

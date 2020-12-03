@@ -37,7 +37,6 @@ public class EmployeeController {
 
     @PostMapping("/update/{id}")
     public Employee update(@RequestBody Employee employee){
-
         return employeeService.update(employee);
     }
 

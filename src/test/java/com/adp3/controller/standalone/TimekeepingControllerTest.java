@@ -45,12 +45,8 @@ public class TimekeepingControllerTest {
     public void testCreate() {
         String urlCreate = timekeepingUrl + "/create";
         ResponseEntity<Timekeeping> storeResponseEntity = restTemplate.withBasicAuth(SECURITY_USERNAME,SECURITY_PASSWORD).postForEntity(urlCreate, timekeeping, Timekeeping.class);
-      //  assertNotNull(storeResponseEntity);
-       // assertNotNull(storeResponseEntity.getBody());
         timekeeping = storeResponseEntity.getBody();
-      //  assertEquals(timekeeping.getempID(), storeResponseEntity.getBody().getempID());
-       // assertEquals(timekeeping.getTime_In(), storeResponseEntity.getBody().getTime_In());
-        assertEquals(timekeeping.getTime_Out(), storeResponseEntity.getBody().getTime_In());
+        assertEquals(timekeeping.toString(), storeResponseEntity.getBody().toString());
     }
 @Test
     public void testRead() {

@@ -9,51 +9,76 @@
 
 
 package com.adp3.service.standalone.impl;
+import com.adp3.entity.standalone.Employee;
 import com.adp3.entity.standalone.Timekeeping;
 import com.adp3.factory.standalone.TimekeepingFactory;
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-public class TimeKeepingServiceImplTest extends TestCase {
+import java.util.Set;
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class TimeKeepingServiceImplTest {
+    @Autowired
+            TimeKeepingServiceImpl serv;
     //private TimeKeepingServiceServicesImpl repository = new TimeKeepingServiceServicesImpl();
-    Timekeeping timekeepingservice = TimekeepingFactory.buildTimekeepingService(1000,1500,"LM88");
+    Timekeeping timekeeping = TimekeepingFactory.buildTimekeepingService(1000,1500,"LM88");
 
 
 
-    public void testGetRepository() {
-    }
 
+    @Test
     public void testCreate() {
 //        TimekeepingService cExpected = repository.create(timekeepingservice);
-//        Assert.assertEquals(cExpected.getempID(),timekeepingservice.getempID());
+        Timekeeping emp_created = serv.create( timekeeping );
+        Assert.assertEquals( timekeeping.getRecID(), emp_created.getRecID() );
+        //        Assert.assertEquals(cExpected.getempID(),timekeepingservice.getempID());
+        System.out.println("Created Employee: " + timekeeping );
 
 
     }
-
+    @Test
     public void testRead() {
 
 //        TimekeepingService rTimekeepingservice  = repository.read(timekeepingservice.getempID());
 //        Assert.assertNotNull(rTimekeepingservice);
-    }
+        Timekeeping reader = serv.read(timekeeping.getempID());
+        System.out.println("Reader data : " + reader );
 
+    }
+    @Test
     public void testUpdate() {
         Timekeeping rTimekeepingservice = new Timekeeping.Builder()
                 .setEmployee_id("LM88")
                 .setTime_In(1500)
                 .setTime_Out(2100)
-                .copy(timekeepingservice)
+                .copy(timekeeping)
                 .build();
-
-        Assert.assertEquals(rTimekeepingservice.getempID(),"LM878");
+        rTimekeepingservice = serv.update(rTimekeepingservice);
+        //Assert.assertNotNull(rTimekeepingservice.toString());
     }
-
+    @Test
     public void testDelete() {
-//        repository.delete(timekeepingservice.getempID());
-//        Assert.assertNotNull(timekeepingservice.getempID());
+        serv.delete( timekeeping.getempID() );
+        System.out.println("Deleted: "+ timekeeping.getempID());
+        System.out.print( "Get All: " +  serv.getAll() );
+
+      // Assert.assertNotNull(timekeeping.getempID());
     }
-
+@Test
     public void testGetAll() {
+        Set<Timekeeping> timekeepimngx = serv.getAll();
+        System.out.print( "Get All: " + timekeepimngx );
+        Assert.assertNotNull(timekeepimngx);
 
-        //Assert.assertNotNull(repository.getAll());
     }
 }

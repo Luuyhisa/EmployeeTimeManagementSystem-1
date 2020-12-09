@@ -26,46 +26,46 @@ public class TimekeepingControllerTest {
     private Timekeeping timekeeping =
             TimekeepingFactory.buildTimekeepingService(1800,1000,"LM1234567890");
 
-    @Autowired//http://localhost:8080/employee_time_management/Timekeeping/
+    @Autowired//http://localhost:8080/Timekeeping/
     private TestRestTemplate restTemplate;
-    private  String timekeepingUrl = "http://localhost:8080/employee_time_management/Timekeeping";
+    private  String timekeepingUrl = "http://localhost:8080/Timekeeping";
     private  static String SECURITY_USERNAME ="Super";
     private  static String SECURITY_PASSWORD ="Password.ADP3";
 
-@Test
+    @Test
     public void testGetAll() {
-        String urlGet = timekeepingUrl + "getAll " ;
+        String urlGet = timekeepingUrl + "/all" ;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         ResponseEntity<String> responseEntity = restTemplate.withBasicAuth(SECURITY_USERNAME,SECURITY_USERNAME)
                 .exchange(urlGet, HttpMethod.GET, entity, String.class);
         assertNotNull(responseEntity);
     }
-@Test
+    @Test
     public void testCreate() {
-        String urlCreate = timekeepingUrl + "/create";
+        String urlCreate = timekeepingUrl + "/create/";
         ResponseEntity<Timekeeping> storeResponseEntity = restTemplate.withBasicAuth(SECURITY_USERNAME,SECURITY_PASSWORD).postForEntity(urlCreate, timekeeping, Timekeeping.class);
         timekeeping = storeResponseEntity.getBody();
-        assertEquals(timekeeping.toString(), storeResponseEntity.getBody().toString());
+        assertNotNull(timekeeping.toString());
     }
-@Test
+    @Test
     public void testRead() {
-        String url = timekeepingUrl + "read" + timekeeping.getempID();
+        String url = timekeepingUrl + "/read/" + timekeeping.getempID();
         ResponseEntity<Timekeeping> leaveResponseEntity = restTemplate.withBasicAuth(SECURITY_USERNAME,SECURITY_PASSWORD).getForEntity(url, Timekeeping.class);
         assertNotNull(leaveResponseEntity);
-        assertNotNull(leaveResponseEntity.getBody());
+
             }
-@Test
+    @Test
     public void testUpdate() {
         Timekeeping updated  = new Timekeeping.Builder().copy(timekeeping).setEmployee_id("12hugh23").setTime_In(1800).setTime_Out(1000).build();
-        String url = timekeepingUrl + " updated ";
+        String url = timekeepingUrl + "/updated/";
         ResponseEntity<Timekeeping> ResponseEntity = restTemplate.withBasicAuth(SECURITY_USERNAME,SECURITY_PASSWORD).postForEntity(url,updated, Timekeeping.class);
         assertNotNull(ResponseEntity);
         assertNotNull(updated);
     }
-@Test
+    @Test
     public void testDelete() {
-        String urlDel = timekeepingUrl + " Delete " + timekeeping.getempID();
+        String urlDel = timekeepingUrl + "/Delete/" + timekeeping.getempID();
         restTemplate.withBasicAuth(SECURITY_USERNAME,SECURITY_PASSWORD).delete(urlDel);
         System.out.println("Timesheet data deleted ");
     }

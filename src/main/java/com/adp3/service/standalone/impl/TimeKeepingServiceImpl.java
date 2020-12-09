@@ -7,8 +7,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-
-
+/**
+ *
+ * Author: Lungisa Lucky Mkhasakhasa
+ * Class: Part Time
+ * Student number: 216060117
+ * Test Class
+ *
+ */
 @Service
 public class TimeKeepingServiceImpl implements TimeKeepingServices {
 @Autowired

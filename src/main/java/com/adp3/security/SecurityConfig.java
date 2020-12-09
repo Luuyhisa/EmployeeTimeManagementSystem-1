@@ -104,15 +104,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/employee_time_management/Role/read", "/employee_time_management/Role/getAll").hasRole(USER_ROLE)
                 .antMatchers(HttpMethod.PATCH,"/employee_time_management/Role/update").hasRole(ADMIN_ROLE)
                 .antMatchers(HttpMethod.DELETE,"/employee_time_management/Role/delete").hasRole(ADMIN_ROLE)
+                .and()//http://localhost:8080/Timekeeping/read/ed4f3dd4-12b3-4323-9088-4cdac72b232d
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST,"/Timekeeping/create").hasRole(ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET,"/Timekeeping/read", "/Role/all").hasRole(USER_ROLE)
+                .antMatchers(HttpMethod.PATCH,"/Timekeeping/update").hasRole(ADMIN_ROLE)
+                .antMatchers(HttpMethod.DELETE,"/Timekeeping/delete").hasRole(ADMIN_ROLE)
 
-                .and()
+                .and().authorizeRequests().anyRequest().authenticated()
+                .and().formLogin().and().httpBasic();
 
-                .csrf().disable()
-                .formLogin().disable();
-            //    .httpBasic();
+//                .csrf().disable()
+//                .formLogin().disable();
 
-//            http.authorizeRequests().anyRequest().authenticated()
-//            .and().formLogin().and().httpBasic();
     }
 
 

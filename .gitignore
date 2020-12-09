@@ -1,7 +1,6 @@
 # Intellij
-
 .idea
 employeetimemanagementsystem.iml
-target/classes
-target/classes/
-target
+target/
+src/main/resources/application.properties
+

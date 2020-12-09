@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Start page</title>
+<!--    <link th:href="@{/public/style.css}" rel="stylesheet" />-->
+</head>
+<body>
+<div align="center">
+<h1>
+    Employees
+</h1>
+
+    </br>
+    <a href = "/new" >add new Employee</a>
+    <table>
+        <thead><tr>
+        <td>
+        ID
+        </td>
+
+            <td>Name
+            </td>
+            <td>Subj
+            </td>
+            <td>Action
+            </td>
+
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="emp : $ (emplist)">
+            <td th:text="${emp.id}}">id</td>
+
+        </tr>
+
+
+
+        </tbody>
+
+    </table>
+</div>
+</body>
+</html>

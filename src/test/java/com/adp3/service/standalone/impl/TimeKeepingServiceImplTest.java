@@ -29,16 +29,13 @@ import java.util.Set;
 @RunWith(SpringRunner.class)
 public class TimeKeepingServiceImplTest {
     @Autowired
-            TimeKeepingServiceImpl serv;
+    TimeKeepingServiceImpl serv;
     //private TimeKeepingServiceServicesImpl repository = new TimeKeepingServiceServicesImpl();
     Timekeeping timekeeping = TimekeepingFactory.buildTimekeepingService(1000,1500,"LM88");
 
-
-
-
     @Test
     public void testCreate() {
-//        TimekeepingService cExpected = repository.create(timekeepingservice);
+       //TimekeepingService cExpected = repository.create(timekeepingservice);
         Timekeeping emp_created = serv.create( timekeeping );
         Assert.assertEquals( timekeeping.getRecID(), emp_created.getRecID() );
         //        Assert.assertEquals(cExpected.getempID(),timekeepingservice.getempID());
@@ -58,7 +55,7 @@ public class TimeKeepingServiceImplTest {
     @Test
     public void testUpdate() {
         Timekeeping rTimekeepingservice = new Timekeeping.Builder()
-                .setEmployee_id("LM88")
+                .setEmployee_id("LM88 ")
                 .setTime_In(1500)
                 .setTime_Out(2100)
                 .copy(timekeeping)

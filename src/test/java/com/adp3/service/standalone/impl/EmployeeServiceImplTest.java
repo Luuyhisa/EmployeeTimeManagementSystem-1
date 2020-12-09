@@ -64,7 +64,9 @@ public class EmployeeServiceImplTest {
     @Test
     public void c_update() {
 
-        Employee update = new Employee.Builder().copy(employee).setEmpLastName("Gigaba").setEmpID("400").build() ;
+        Employee update = new Employee.Builder()
+                .copy(employee).setEmpLastName("Gigaba")
+                .setEmpID("400").build() ;
         update = emp_service.update( update );
         System.out.println("Updated: " + update );
 

@@ -31,30 +31,27 @@ public class TimeKeepingServiceImplTest {
     @Autowired
     TimeKeepingServiceImpl serv;
     //private TimeKeepingServiceServicesImpl repository = new TimeKeepingServiceServicesImpl();
-    Timekeeping timekeeping = TimekeepingFactory.buildTimekeepingService(1000,1500,"LM88");
+    Timekeeping timekeeping = TimekeepingFactory.buildTimekeepingService(1000,1500,"LM888");
 
     @Test
     public void testCreate() {
-       //TimekeepingService cExpected = repository.create(timekeepingservice);
-        Timekeeping emp_created = serv.create( timekeeping );
-        Assert.assertEquals( timekeeping.getRecID(), emp_created.getRecID() );
-        //        Assert.assertEquals(cExpected.getempID(),timekeepingservice.getempID());
+
+        Assert.assertNotNull( "Created successful",timekeeping);
         System.out.println("Created Employee: " + timekeeping );
 
     }
     @Test
     public void testRead() {
 
-//        TimekeepingService rTimekeepingservice  = repository.read(timekeepingservice.getempID());
-//        Assert.assertNotNull(rTimekeepingservice);
-        Timekeeping reader = serv.read(timekeeping.getempID());
-        System.out.println("Reader data : " + reader );
+        Timekeeping reader = serv.read(timekeeping.getRecID());
+        Assert.assertNull(reader.getRecID());
+        System.out.println("Reader data : " + reader.toString() );
 
     }
     @Test
     public void testUpdate() {
 
-        if (serv.read(timekeeping.getRecID())!=null){
+        if (serv.read(timekeeping.getempID())!=null){
             serv.update(timekeeping);
             System.out.println("Record Exists:  " + timekeeping.getRecID());
             System.out.println("Updated : " + timekeeping);
@@ -77,8 +74,10 @@ public class TimeKeepingServiceImplTest {
         // Assert.assertNotNull(timekeeping.getempID());
         if (serv.read(timekeeping.getRecID())!=null){
             serv.delete(timekeeping.getRecID());
-            System.out.println("Record Exists:  " + timekeeping.getRecID());
-            System.out.println("Updated : " + timekeeping);
+            System.out.println("Record Deleted:  " + timekeeping.getRecID());
+            System.out.println("Deleted : " + timekeeping);
+        }else{
+            System.out.println("Record does not  Exists: ");
         }
     }
 @Test

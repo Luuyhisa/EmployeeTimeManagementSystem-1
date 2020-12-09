@@ -42,10 +42,9 @@ public class TimeKeepingServiceImplTest {
     }
     @Test
     public void testRead() {
-
-        Timekeeping reader = serv.read(timekeeping.getRecID());
-        Assert.assertNull(reader.getRecID());
-        System.out.println("Reader data : " + reader.toString() );
+       // Timekeeping reader = serv.read(timekeeping.getRecID());
+        Assert.assertNull(serv.read(timekeeping.getRecID()));
+        System.out.println(" Able to read data : " );
 
     }
     @Test

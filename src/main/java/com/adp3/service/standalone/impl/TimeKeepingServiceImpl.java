@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class TimeKeepingServiceImpl implements TimeKeepingServices {
 @Autowired
-private TimekeepingRepository timekeepingrepository;
+ TimekeepingRepository timekeepingrepository;
 
     @Override
     public Set<Timekeeping> getAll() {
@@ -21,7 +21,7 @@ private TimekeepingRepository timekeepingrepository;
 
     @Override
     public Timekeeping create(Timekeeping t) {
-        return this.timekeepingrepository.save(t);
+        return timekeepingrepository.save(t);
     }
 
     @Override

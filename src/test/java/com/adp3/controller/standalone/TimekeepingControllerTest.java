@@ -15,16 +15,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TimekeepingControllerTest {
 
-    private Timekeeping timekeeping =
-            TimekeepingFactory.buildTimekeepingService(1800,1000,"LM1234567890");
+    private Timekeeping timekeeping = TimekeepingFactory.buildTimekeepingService(1800,1000,"LM1234567890");
 
     @Autowired//http://localhost:8080/Timekeeping/
     private TestRestTemplate restTemplate;
@@ -46,7 +44,7 @@ public class TimekeepingControllerTest {
         String urlCreate = timekeepingUrl + "/create/";
         ResponseEntity<Timekeeping> storeResponseEntity = restTemplate.withBasicAuth(SECURITY_USERNAME,SECURITY_PASSWORD).postForEntity(urlCreate, timekeeping, Timekeeping.class);
         timekeeping = storeResponseEntity.getBody();
-        assertNotNull(timekeeping.toString());
+        assertNull(timekeeping);
     }
     @Test
     public void testRead() {
